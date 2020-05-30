@@ -9,8 +9,8 @@
 import Foundation
 
 
-class EmojiMemoryGame {
-  private var model: MemoryGame<String> =
+class EmojiMemoryGame: ObservableObject {
+  @Published private var model: MemoryGame<String> =
     EmojiMemoryGame.createMemoryGame()
   
   
@@ -39,6 +39,6 @@ class EmojiMemoryGame {
   //
   
   func choose(card: MemoryGame<String>.Card){
-    model.choose(card: card)
+    model.choose(card)
   }
 }

@@ -43,8 +43,10 @@ struct CardView: View {
           .stroke(lineWidth: edgeLineWidth)
         Text(self.card.content)
       } else {
-        RoundedRectangle(cornerRadius: cornerRadius)
+        if !card.isMatched {
+          RoundedRectangle(cornerRadius: cornerRadius)
           .fill()
+        }
       }
     } // ZStack
       .font(Font.system(size: fontSize(for: size)))
@@ -63,11 +65,6 @@ struct CardView: View {
     min(size.width, size.height) * 0.75
   }
 } // CardView
-
-
-
-
-
 
 
 

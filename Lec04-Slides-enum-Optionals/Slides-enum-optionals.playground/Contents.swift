@@ -283,3 +283,14 @@ if let safeHello2 = hello2 {
 }
 
 
+
+//  ************************************************************
+//  MARK: OPTIONAL-03 - Optional defaulting
+//
+
+print("\n\n --- OPTIONAL-03 - Optional defaulting --- \n")
+
+let x: String? = nil
+let y = x ?? "foo"
+print("y: \(y)")
+// Prints out: y: foo

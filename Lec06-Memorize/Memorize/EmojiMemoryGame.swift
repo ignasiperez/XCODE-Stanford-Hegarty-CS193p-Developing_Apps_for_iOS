@@ -39,6 +39,8 @@ class EmojiMemoryGame: ObservableObject {
   //
   
   func choose(card: MemoryGame<String>.Card){
+    print("EmojiMemoryGame - choose(card: MemoryGame<String>.Card)")
+    print(" - card: \(card)")
     model.choose(card)
   }
   

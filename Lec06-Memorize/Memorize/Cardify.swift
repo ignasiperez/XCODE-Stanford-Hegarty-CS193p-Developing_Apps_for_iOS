@@ -14,14 +14,13 @@ struct Cardify: AnimatableModifier {
   
   var rotation: Double
   
-  init(isFaceUp: Bool) {
-    rotation = isFaceUp ? 0 : 180
-  }
-  
-  
   var animatableData: Double {
     get { return rotation }
     set { rotation = newValue }
+  }
+  
+  init(isFaceUp: Bool) {
+    rotation = isFaceUp ? 0 : 180
   }
   
   var isFaceUp: Bool {

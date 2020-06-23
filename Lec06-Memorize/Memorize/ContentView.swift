@@ -15,7 +15,7 @@ struct EmojiMemoryGameView: View {
     VStack {
       Grid(viewModel.cards) { card in
         CardView(card: card).onTapGesture {
-          withAnimation(.linear(duration: 1.5)) {
+          withAnimation(.linear(duration: 0.75)) {
             self.viewModel.choose(card: card)
           }
         }
@@ -24,7 +24,7 @@ struct EmojiMemoryGameView: View {
         .padding()
         .foregroundColor(Color.orange)
       Button(action: {
-        withAnimation(Animation.easeInOut(duration: 1.5)) {
+        withAnimation(.easeInOut) {
           self.viewModel.resetGame()
         }
       }) {
@@ -44,14 +44,32 @@ struct CardView: View {
     }
   } // body
   
+  @State private var animatedBonusRemaining: Double = 0
+  
+  private func startBonusTimeAnimation() {
+    animatedBonusRemaining = card.bonusRemaining
+    withAnimation(.linear(duration: card.bonusTimeRemaining)) {
+      animatedBonusRemaining = 0
+    }
+  }
+  
   @ViewBuilder
   private func body(for size: CGSize) -> some View {
     if card.isFaceUp || !card.isMatched {
       ZStack {
-        Pie(startAngle: Angle.degrees(0-90),
-            endAngle: Angle.degrees(110-90),
-            clockwise: true
-        )
+        Group {
+          if card.isConsumingBonusTime {
+            Pie(startAngle: Angle.degrees(0-90),
+                endAngle: Angle.degrees(-animatedBonusRemaining*360-90),
+                clockwise: true
+            )
+          } else  {
+            Pie(startAngle: Angle.degrees(0-90),
+                endAngle: Angle.degrees(-card.bonusRemaining*360-90),
+                clockwise: true
+            )
+          }
+        } // Group
           .padding(5)
           .opacity(0.4)
         Text(self.card.content)
@@ -63,7 +81,7 @@ struct CardView: View {
       } // ZStack
         .cardify(isFaceUp: card.isFaceUp)
         .transition(AnyTransition.scale)
-    } // if
+    } // if card.isFaceUp || !card.isMatched
   } // body
   
   

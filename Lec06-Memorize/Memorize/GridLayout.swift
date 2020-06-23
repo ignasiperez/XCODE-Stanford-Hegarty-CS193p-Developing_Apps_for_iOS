@@ -68,4 +68,5 @@ struct GridLayout {
       )
     }
   } // location
-} // GridLayout
+  
+} // struct GridLayout

@@ -9,7 +9,7 @@
 import Foundation
 
 struct EmojiArt {
-  var background: URL?
+  var backgroundURL: URL?
   var emojis = [Emoji]()
   
   struct Emoji: Identifiable {
@@ -26,7 +26,7 @@ struct EmojiArt {
       self.size = size
       self.id = id
     }
-  }
+  } // struct Emoji
   
   private var uniqueEmojiId = 0
   
@@ -34,4 +34,4 @@ struct EmojiArt {
     uniqueEmojiId += 1
     emojis.append(Emoji(text: text, x: x, y: y, size: size, id: uniqueEmojiId))
   }
-}
+} // struct emojiArt
